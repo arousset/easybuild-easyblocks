@@ -111,11 +111,15 @@ class EB_OpenFOAM(EasyBlock):
         if comp_fam == toolchain.GCC:  #@UndefinedVariable
             self.wm_compiler="Gcc"
 
+            # "-Xlinker --no-as-needed" is added for linkers that force --as-needed flag
+            self.cfg.update('prebuildopts', 'CFLAGS="$CFLAGS -Xlinker --no-as-needed" CXXFLAGS="$CXXFLAGS -Xlinker --no-as-needed"')
+
         elif comp_fam == toolchain.INTELCOMP:  #@UndefinedVariable
             self.wm_compiler="Icc"
 
             # make sure -no-prec-div is used with Intel compilers
-            self.cfg.update('prebuildopts', 'CFLAGS="$CFLAGS -no-prec-div" CXXFLAGS="$CXXFLAGS -no-prec-div"')
+            # "-Xlinker --no-as-needed" is added for linkers that force --as-needed flag
+            self.cfg.update('prebuildopts', 'CFLAGS="$CFLAGS -no-prec-div -Xlinker --no-as-needed" CXXFLAGS="$CXXFLAGS -no-prec-div -Xlinker --no-as-needed"')
 
         else:
             self.log.error("Unknown compiler family, don't know how to set WM_COMPILER")
