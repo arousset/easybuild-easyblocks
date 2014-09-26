@@ -115,7 +115,7 @@ class EB_OpenFOAM(EasyBlock):
             self.wm_compiler="Icc"
 
             # make sure -no-prec-div is used with Intel compilers
-            self.cfg.update('prebuildopts', 'CFLAGS="$CFLAGS -no-prec-div" CXXFLAGS="$CXXFLAGS -no-prec-div"')
+            self.cfg.update('prebuildopts', 'export CFLAGS="$CFLAGS -no-prec-div" CXXFLAGS="$CXXFLAGS -no-prec-div && "')
 
         else:
             self.log.error("Unknown compiler family, don't know how to set WM_COMPILER")
