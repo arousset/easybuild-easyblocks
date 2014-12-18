@@ -193,7 +193,7 @@ class EB_OpenFOAM(EasyBlock):
     def sanity_check_step(self):
         """Custom sanity check for OpenFOAM"""
 
-        psubdir = "linux64%sDPOpt" % self.wm_compiler
+        psubdir = "linux%sDPOpt" % self.wm_compiler
 
         openfoam_extend_v3 = 'extend' in self.name.lower() and LooseVersion(self.version) >= LooseVersion('3.0')
         if openfoam_extend_v3 or LooseVersion(self.version) < LooseVersion("2"):
